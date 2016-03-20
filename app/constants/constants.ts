@@ -1,0 +1,1 @@
+export var DIRECTIVE_PREFIX = "orbital-";

@@ -1,8 +1,8 @@
 import { Component }       from "angular2/core";
 import { HeroService }     from "./services/hero/hero.service";
-import { HeroesComponent } from "./heroes.component";
-import { HeroDetailComponent } from "./hero-detail.component";
-import { DashboardComponent } from "./dashboard.component";
+import { HeroesComponent } from "./components/heroes/heroes.component";
+import { HeroDetailComponent } from "./components/hero-detail/hero-detail.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/router";
 
 @RouteConfig([
@@ -33,6 +33,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/route
       
     </nav>
     <router-outlet></router-outlet>
+    
   `,
   directives: [
     ROUTER_DIRECTIVES

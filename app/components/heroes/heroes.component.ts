@@ -1,15 +1,15 @@
 import {Component} from "angular2/core";
 import { Router } from "angular2/router";
 
-import {Hero} from "./hero";
-import {HeroDetailComponent} from "./hero-detail.component";
-import {HeroService} from "./services/hero/hero.service";
+import {Hero} from "../../interfaces/hero/hero";
+import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
+import {HeroService} from "../../services/hero/hero.service";
 import {OnInit} from "angular2/core";
 
 @Component({
     selector: "my-heroes",
-    //providers: [HeroService],
-    template:`
+    // providers: [HeroService],
+    template: `
       <h1>{{title}}</h1>
       <h2>{{hero.name}} details!</h2>
       <div><label>id: </label>{{hero.id}}</div>
@@ -32,13 +32,13 @@ import {OnInit} from "angular2/core";
           <h2>
             {{selectedHero.name | uppercase}} is my hero
           </h2>
-          <button (click)="gotoDetail()">View Details</button>
+          <button (click)="gotoDetail(selectedHero)">View Details</button>
         </div>
           
         `,
     directives: [HeroDetailComponent],
 })
-export class HeroesComponent implements OnInit { 
+export class HeroesComponent implements OnInit {
     title = "Tour of Heroes";
     hero: Hero = {
       id: 1,
@@ -49,7 +49,7 @@ export class HeroesComponent implements OnInit {
 
     onSelect(hero: Hero) { this.selectedHero = hero; }
 
-    constructor(private _heroService: HeroService) { }
+    constructor(private _router: Router, private _heroService: HeroService) { }
     ngOnInit() {
         this.getHeroes();
       }

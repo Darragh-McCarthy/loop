@@ -1,11 +1,13 @@
 import { Component, OnInit } from "angular2/core";
 import { Router } from "angular2/router";
-import { Hero } from "./hero";
-import { HeroService } from "./services/hero/hero.service";
+import { Hero } from "../../interfaces/hero/hero";
+import { HeroService } from "../../services/hero/hero.service";
+import { NotesList } from "../../components/notes-list/notes-list.component";
 
 @Component({
   selector: "my-dashboard",
-  templateUrl: "app/dashboard.component.html",
+  templateUrl: "app/components/dashboard/dashboard.component.html",
+  directives: [NotesList]
 })
 export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];
@@ -17,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this._heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1,5));
+      .then(heroes => this.heroes = heroes.slice(1, 5));
   }
   gotoDetail(hero: Hero) {
     let link = ["HeroDetail", { id: hero.id }];

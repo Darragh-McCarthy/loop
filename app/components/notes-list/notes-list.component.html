@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+<div *ngFor="#eachNote of notes">
+    <h2>{{eachNote.text}}</h2>
+    <orbital-note
+        [note]="eachNote"
+    ></orbital-note>
+</div>
+    
