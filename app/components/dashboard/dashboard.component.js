@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../services/hero/hero.service", "../../components/notes-list/notes-list.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "../../components/notes-list/notes-list.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,32 +10,25 @@ System.register(["angular2/core", "../../services/hero/hero.service", "../../com
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, hero_service_1, notes_list_component_1;
+    var core_1, notes_list_component_1;
     var DashboardComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (hero_service_1_1) {
-                hero_service_1 = hero_service_1_1;
-            },
             function (notes_list_component_1_1) {
                 notes_list_component_1 = notes_list_component_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
-                function DashboardComponent(
-                    //private _router: Router,
-                    _heroService) {
-                    this._heroService = _heroService;
-                    this.heroes = [];
+                function DashboardComponent() {
                 }
                 DashboardComponent.prototype.ngOnInit = function () {
                     /*this._heroService.getHeroes()
                       .then(heroes => this.heroes = heroes.slice(1, 5));*/
                 };
-                DashboardComponent.prototype.gotoDetail = function (hero) {
+                DashboardComponent.prototype.gotoDetail = function () {
                     //let link = ["HeroDetail", { id: hero.id }];
                     //this._router.navigate(link);
                 };
@@ -45,7 +38,7 @@ System.register(["angular2/core", "../../services/hero/hero.service", "../../com
                         templateUrl: "app/components/dashboard/dashboard.component.html",
                         directives: [notes_list_component_1.NotesList]
                     }), 
-                    __metadata('design:paramtypes', [hero_service_1.HeroService])
+                    __metadata('design:paramtypes', [])
                 ], DashboardComponent);
                 return DashboardComponent;
             }());

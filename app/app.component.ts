@@ -5,18 +5,10 @@ import {
     ROUTER_PROVIDERS
 } from "angular2/router";
 
-import { HeroService }     from "./services/hero/hero.service";
-import { HeroesComponent } from "./components/heroes/heroes.component";
-import { HeroDetailComponent } from "./components/hero-detail/hero-detail.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { TagComponent } from "./components/tag/tag.component";
 
 @RouteConfig([
-  {
-    path: "/heroes",
-    name: "Heroes",
-    component: HeroesComponent
-  },
   {
     path: "/tag/:tagName",
     name: "Tag",
@@ -28,18 +20,12 @@ import { TagComponent } from "./components/tag/tag.component";
     component: DashboardComponent,
     useAsDefault: true,
   },
-  {
-    path: "/detail/:id",
-    name: "HeroDetail",
-    component: HeroDetailComponent
-  },
 ])
 @Component({
   selector: "my-app",
   template: `
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['Heroes']">Heroes</a>
       <a [routerLink]="['Tag', {tagName:'hi there'}]">Tag</a>
       
     </nav>
@@ -50,8 +36,7 @@ import { TagComponent } from "./components/tag/tag.component";
     ROUTER_DIRECTIVES
   ],
   providers: [
-    ROUTER_PROVIDERS,
-    HeroService
+    ROUTER_PROVIDERS
   ]
 })
 export class AppComponent {}

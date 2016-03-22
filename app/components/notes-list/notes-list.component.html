@@ -1,9 +1,6 @@
 <div class="notes-list">
-    <div>
-        <orbital-note
-            *ngFor="#eachNote of notes"
-            [note]="eachNote"
-        ></orbital-note>
-    </div>
+    <orbital-note
+        *ngFor="#eachNote of notes"
+        [note]="eachNote"
+    ></orbital-note>
 </div>
-<a [routerLink]="['Tag', {tagName:'helloo'}]">Go</a>
