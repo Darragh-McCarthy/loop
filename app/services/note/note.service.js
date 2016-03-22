@@ -25,6 +25,9 @@ System.register(["angular2/core", "../../mock/notes/mock-notes"], function(expor
                 function NoteService() {
                 }
                 NoteService.prototype.promiseNotes = function () { return Promise.resolve(mock_notes_1.MOCK_NOTES); };
+                NoteService.prototype.promiseNotesByTagName = function (tagName) {
+                    return Promise.resolve(mock_notes_1.MOCK_NOTES.filter(function (eachNote) { return eachNote.tags.indexOf(tagName) > -1; }));
+                };
                 NoteService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])

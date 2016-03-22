@@ -27,10 +27,8 @@ import { TagComponent } from "./components/tag/tag.component";
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
       <a [routerLink]="['Tag', {tagName:'hi there'}]">Tag</a>
-      
     </nav>
     <router-outlet></router-outlet>
-    
   `,
   directives: [
     ROUTER_DIRECTIVES

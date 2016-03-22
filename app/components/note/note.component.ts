@@ -11,6 +11,6 @@ import { ROUTER_DIRECTIVES } from "angular2/router";
     styleUrls: ["app/components/note/note.component.css"],
     directives: [TextareaDirective, ROUTER_DIRECTIVES],
 })
-export class Note {
+export class NoteComponent {
     @Input("note") note: string;
 }

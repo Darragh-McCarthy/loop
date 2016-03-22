@@ -11,7 +11,7 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, constants_1, textarea_component_1, router_1;
-    var Note;
+    var NoteComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -27,14 +27,14 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
                 router_1 = router_1_1;
             }],
         execute: function() {
-            Note = (function () {
-                function Note() {
+            NoteComponent = (function () {
+                function NoteComponent() {
                 }
                 __decorate([
                     core_1.Input("note"), 
                     __metadata('design:type', String)
-                ], Note.prototype, "note", void 0);
-                Note = __decorate([
+                ], NoteComponent.prototype, "note", void 0);
+                NoteComponent = __decorate([
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "note",
                         templateUrl: "app/components/note/note.component.html",
@@ -42,10 +42,10 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
                         directives: [textarea_component_1.TextareaDirective, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [])
-                ], Note);
-                return Note;
+                ], NoteComponent);
+                return NoteComponent;
             }());
-            exports_1("Note", Note);
+            exports_1("NoteComponent", NoteComponent);
         }
     }
 });

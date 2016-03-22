@@ -48,8 +48,8 @@ System.register(["angular2/core", "../../constants/constants", "../../services/n
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "notes-list",
                         templateUrl: "app/components/notes-list/notes-list.component.html",
-                        providers: [note_service_1.NoteService /*, ROUTER_PROVIDERS*/],
-                        directives: [note_component_1.Note, router_1.ROUTER_DIRECTIVES],
+                        providers: [note_service_1.NoteService],
+                        directives: [note_component_1.NoteComponent, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [note_service_1.NoteService])
                 ], NotesList);
