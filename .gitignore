@@ -1,3 +1,5 @@
 app/*.js
 app/*.map
 node_modules
+.d.js
+.d.js.map
