@@ -1,4 +1,3 @@
-/* global autosize */
 System.register(["angular2/core", "../../constants/constants", "../textarea/textarea.component", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;

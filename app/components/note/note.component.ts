@@ -1,6 +1,3 @@
-/* global autosize */
-
-
 import { Component, Input } from "angular2/core";
 import { DIRECTIVE_PREFIX } from "../../constants/constants";
 import { NoteService } from "../../services/note/note.service";
