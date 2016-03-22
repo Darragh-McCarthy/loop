@@ -1,9 +1,15 @@
-import { Component }       from "angular2/core";
+import { Component } from "angular2/core";
+import {
+    RouteConfig,
+    ROUTER_DIRECTIVES,
+    ROUTER_PROVIDERS
+} from "angular2/router";
+
 import { HeroService }     from "./services/hero/hero.service";
 import { HeroesComponent } from "./components/heroes/heroes.component";
 import { HeroDetailComponent } from "./components/hero-detail/hero-detail.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/router";
+import { TagComponent } from "./components/tag/tag.component";
 
 @RouteConfig([
   {
@@ -12,10 +18,15 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/route
     component: HeroesComponent
   },
   {
+    path: "/tag/:tagName",
+    name: "Tag",
+    component: TagComponent,
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
     component: DashboardComponent,
-    useAsDefault: true
+    useAsDefault: true,
   },
   {
     path: "/detail/:id",
@@ -26,10 +37,10 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/route
 @Component({
   selector: "my-app",
   template: `
-    <h1>{{title}}</h1>
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
       <a [routerLink]="['Heroes']">Heroes</a>
+      <a [routerLink]="['Tag', {tagName:'hi there'}]">Tag</a>
       
     </nav>
     <router-outlet></router-outlet>
@@ -43,7 +54,5 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/route
     HeroService
   ]
 })
-export class AppComponent {
-  title = "Tour of Heroes";
-}
+export class AppComponent {}
 

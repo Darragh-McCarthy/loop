@@ -1,0 +1,14 @@
+
+
+orbital-notes-list {
+    margin: 0 auto;
+    max-width:40em;
+    display:block;
+}
+orbital-note {
+    padding: 1em 0;
+    display:block;
+}
+orbital-note + orbital-note {
+    margin-top:1em;
+}

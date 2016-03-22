@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../constants/constants", "../../services/note/note.service", "../note/note.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "../../constants/constants", "../../services/note/note.service", "../note/note.component", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "../../constants/constants", "../../services/n
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, constants_1, note_service_1, note_component_1;
+    var core_1, constants_1, note_service_1, note_component_1, router_1;
     var NotesList;
     return {
         setters:[
@@ -25,24 +25,31 @@ System.register(["angular2/core", "../../constants/constants", "../../services/n
             },
             function (note_component_1_1) {
                 note_component_1 = note_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             NotesList = (function () {
-                function NotesList(_NoteService) {
+                function NotesList(_NoteService /*,
+                    //private _router: Router*/) {
                     this._NoteService = _NoteService;
-                    this.title = "Notes list title 1";
                 }
                 NotesList.prototype.ngOnInit = function () {
                     var _this = this;
                     this._NoteService.promiseNotes()
-                        .then(function (notes) { return _this.notes = notes; });
+                        .then(function (notes) { return _this.notes = notes; })
+                        .then(function (notes) { return console.log(notes); });
+                };
+                NotesList.prototype.viewNotesWithTag = function () {
+                    //this._router.navigate(["Tag", { tagName: "testingTag" }]);
                 };
                 NotesList = __decorate([
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "notes-list",
                         templateUrl: "app/components/notes-list/notes-list.component.html",
-                        providers: [note_service_1.NoteService],
-                        directives: [note_component_1.Note]
+                        providers: [note_service_1.NoteService /*, ROUTER_PROVIDERS*/],
+                        directives: [note_component_1.Note, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [note_service_1.NoteService])
                 ], NotesList);

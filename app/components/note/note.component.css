@@ -1,0 +1,23 @@
+.note__tag {
+    color:#999;
+    display: inline-block;
+    padding:0.3em 0;
+    padding:0.5em 1.5em;
+    text-decoration: none;
+}
+.note__tag + .note__tag {
+    margin-left:1em;
+}
+.note__textarea {
+    width:100%;
+    max-width:100%;
+    border:none;
+    padding:1em;
+    font-size:1rem;
+    outline:0;
+    resize: none;
+    border-radius:0.5em;
+}
+.note__textarea:focus {
+    background:#eee;
+}

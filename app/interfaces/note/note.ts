@@ -3,4 +3,5 @@ export interface NoteInterface {
     text: string;
     updated: Date;
     created: Date;
+    tags: string[];
 };

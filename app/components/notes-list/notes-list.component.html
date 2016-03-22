@@ -1,8 +1,9 @@
-<h1>{{title}}</h1>
-<div *ngFor="#eachNote of notes">
-    <h2>{{eachNote.text}}</h2>
-    <orbital-note
-        [note]="eachNote"
-    ></orbital-note>
+<div class="notes-list">
+    <div>
+        <orbital-note
+            *ngFor="#eachNote of notes"
+            [note]="eachNote"
+        ></orbital-note>
+    </div>
 </div>
-    
+<a [routerLink]="['Tag', {tagName:'helloo'}]">Go</a>

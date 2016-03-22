@@ -1,4 +1,5 @@
-System.register(["angular2/core", "../../constants/constants"], function(exports_1, context_1) {
+/* global autosize */
+System.register(["angular2/core", "../../constants/constants", "../textarea/textarea.component", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +11,7 @@ System.register(["angular2/core", "../../constants/constants"], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, constants_1;
+    var core_1, constants_1, textarea_component_1, router_1;
     var Note;
     return {
         setters:[
@@ -19,11 +20,16 @@ System.register(["angular2/core", "../../constants/constants"], function(exports
             },
             function (constants_1_1) {
                 constants_1 = constants_1_1;
+            },
+            function (textarea_component_1_1) {
+                textarea_component_1 = textarea_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             Note = (function () {
                 function Note() {
-                    console.log("note:", this.note);
                 }
                 __decorate([
                     core_1.Input("note"), 
@@ -33,6 +39,8 @@ System.register(["angular2/core", "../../constants/constants"], function(exports
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "note",
                         templateUrl: "app/components/note/note.component.html",
+                        styleUrls: ["app/components/note/note.component.css"],
+                        directives: [textarea_component_1.TextareaDirective, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Note);
