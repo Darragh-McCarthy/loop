@@ -1,0 +1,6 @@
+store edit history
+    undo historical edit
+
+snooze for week, month, quarter, year, 3 years
+
+custom font-size

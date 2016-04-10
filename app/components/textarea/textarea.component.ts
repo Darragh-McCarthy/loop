@@ -4,10 +4,14 @@ import { Directive, Input, ElementRef } from "angular2/core";
     selector: "textarea"
 })
 export class TextareaDirective {
+    // find alternative to ElementRef
     constructor(private _textareaElement: ElementRef) {
         autosize(_textareaElement.nativeElement);
-        setTimeout(function() {
-            autosize.update(_textareaElement.nativeElement);
+        this.updateAutosize();
+    }
+    updateAutosize() {
+        setTimeout(() => {
+            autosize.update(this._textareaElement.nativeElement);
         });
     }
 }

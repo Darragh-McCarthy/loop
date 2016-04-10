@@ -1,21 +1,14 @@
-import { Component, OnInit } from "angular2/core";
+import { Component } from "angular2/core";
 import { NotesList } from "../../components/notes-list/notes-list.component";
+import { ROUTER_DIRECTIVES } from "angular2/router";
 
 @Component({
   selector: "my-dashboard",
   templateUrl: "app/components/dashboard/dashboard.component.html",
-  directives: [NotesList]
+  styleUrls: ["app/components/dashboard/dashboard.component.css"],
+  directives: [
+      NotesList,
+      ROUTER_DIRECTIVES
+  ]
 })
-export class DashboardComponent implements OnInit {
-
-  constructor() {}
-
-  ngOnInit() {
-    /*this._heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));*/
-  }
-  gotoDetail() {
-    //let link = ["HeroDetail", { id: hero.id }];
-    //this._router.navigate(link);
-  }
-}
+export class DashboardComponent {}

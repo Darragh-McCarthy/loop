@@ -1,1 +1,10 @@
-<orbital-notes-list></orbital-notes-list>
+<button class="create-note-button"
+    (click)="notesList.prependEmptyNote()">
+    Create Note
+</button>
+
+<div class="dashboard">
+    <orbital-notes-list
+        #notesList
+    ></orbital-notes-list>
+</div>

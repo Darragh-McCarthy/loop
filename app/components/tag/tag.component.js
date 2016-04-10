@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/router", "../../constants/constants", "../note/note.component", "../../services/note/note.service"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/router", "../../constants/constants", "../note/note.component", "../../services/note/note.service", "../../services/note/firebase-note.service", "../../services/firebase/firebase.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "angular2/router", "../../constants/constants"
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, constants_1, note_component_1, note_service_1;
+    var core_1, router_1, constants_1, note_component_1, note_service_1, firebase_note_service_1, firebase_service_1;
     var TagComponent;
     return {
         setters:[
@@ -28,27 +28,34 @@ System.register(["angular2/core", "angular2/router", "../../constants/constants"
             },
             function (note_service_1_1) {
                 note_service_1 = note_service_1_1;
+            },
+            function (firebase_note_service_1_1) {
+                firebase_note_service_1 = firebase_note_service_1_1;
+            },
+            function (firebase_service_1_1) {
+                firebase_service_1 = firebase_service_1_1;
             }],
         execute: function() {
             TagComponent = (function () {
-                function TagComponent(_routeParams, _router, _NoteService) {
+                function TagComponent(_routeParams, 
+                    // private _router: Router,
+                    _NoteService) {
                     var _this = this;
                     this._routeParams = _routeParams;
-                    this._router = _router;
                     this._NoteService = _NoteService;
                     this.title = "Tag title";
                     var tagName = _routeParams.get("tagName");
                     this.title = tagName;
-                    this._NoteService.promiseNotesByTagName(tagName).then(function (notes) { return _this.notes = notes; });
+                    this._NoteService.get(tagName).then(function (notes) { return _this.notes = notes; });
                 }
                 TagComponent = __decorate([
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "tag",
                         templateUrl: "app/components/tag/tag.component.html",
                         directives: [note_component_1.NoteComponent],
-                        providers: [note_service_1.NoteService]
+                        providers: [note_service_1.NoteService, firebase_note_service_1.FirebaseNoteService, firebase_service_1.FirebaseService]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router, note_service_1.NoteService])
+                    __metadata('design:paramtypes', [router_1.RouteParams, note_service_1.NoteService])
                 ], TagComponent);
                 return TagComponent;
             }());

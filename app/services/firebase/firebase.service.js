@@ -11,36 +11,28 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var TextareaDirective;
+    var FirebaseService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            TextareaDirective = (function () {
-                // find alternative to ElementRef
-                function TextareaDirective(_textareaElement) {
-                    this._textareaElement = _textareaElement;
-                    autosize(_textareaElement.nativeElement);
-                    this.updateAutosize();
+            FirebaseService = (function () {
+                function FirebaseService() {
+                    this.Firebase = new Firebase("https://luminous-heat-3833.firebaseio.com/");
                 }
-                TextareaDirective.prototype.updateAutosize = function () {
-                    var _this = this;
-                    setTimeout(function () {
-                        autosize.update(_this._textareaElement.nativeElement);
-                    });
+                FirebaseService.prototype.getFirebaseRef = function () {
+                    return this.Firebase;
                 };
-                TextareaDirective = __decorate([
-                    core_1.Directive({
-                        selector: "textarea"
-                    }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef])
-                ], TextareaDirective);
-                return TextareaDirective;
+                FirebaseService = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [])
+                ], FirebaseService);
+                return FirebaseService;
             }());
-            exports_1("TextareaDirective", TextareaDirective);
+            exports_1("FirebaseService", FirebaseService);
         }
     }
 });
-//# sourceMappingURL=textarea.component.js.map
+//# sourceMappingURL=firebase.service.js.map

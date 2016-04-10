@@ -1,10 +1,53 @@
-<div class="note">
-    <textarea rows="1" class="note__textarea" [(ngModel)]="note.text"></textarea>
-    <div class="note__tags">
+<div class="container">
+
+    <div *ngIf="isSaving">Saving...</div>
+    
+    
+    <div class="tags">
         <a *ngFor="#eachTag of note.tags"
-            class="note__tag"
+            class="tag"
             [routerLink]="['Tag', { tagName: eachTag }]">
             {{eachTag}}
-        </a>
+        </a>&nbsp;
     </div>
+    
+    
+    <textarea
+        rows="1"
+        [(ngModel)]="note.text"
+        (focus)="appendHashTags();"
+        (blur)="stripHashTags();saveNote()"
+        (keyup)="isUpdated = true"
+        autofocus
+    ></textarea>
+    
+        
+    <div *ngIf="note.text" 
+        class="archive-container">
+        <button class="archive-button"
+            *ngIf="!archiveDuration"
+            (click)="archiveFor1Week();archiveDuration = 'WEEK'">
+            Hide
+        </button>   
+        <div class="archive-options">
+            <button *ngIf="archiveDuration === 'WEEK'" 
+                (click)="archiveFor1Month();archiveDuration = 'MONTH';">
+                Hidden for 1 Week
+            </button>
+            <button *ngIf="archiveDuration === 'MONTH'" 
+                (click)="archiveFor1Year();archiveDuration = 'YEAR';">
+                Hidden for 1 Month
+            </button>
+            <button *ngIf="archiveDuration === 'YEAR'" 
+                (click)="archiveFor100Years();archiveDuration = 'INDEFINITE';">
+                Hidden for 1 Year
+            </button>
+            <button *ngIf="archiveDuration === 'INDEFINITE'" 
+                (click)="undoArchive();archiveDuration = null;">
+                Hidden until I search for it
+            </button>
+        </div>
+    </div>
+    
+       
 </div>

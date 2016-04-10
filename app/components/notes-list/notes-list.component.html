@@ -1,6 +1,10 @@
-<div class="notes-list">
-    <orbital-note
-        *ngFor="#eachNote of notes"
-        [note]="eachNote"
-    ></orbital-note>
+<div class="orbital-notes-list">
+    <div *ngFor="#eachNote of notes; #i = index">
+        <orbital-note
+            [note]="eachNote"
+            [isNoteFocused]="false"
+        ></orbital-note>
+    </div>
+    
+        
 </div>

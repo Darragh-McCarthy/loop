@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../mock/notes/mock-notes"], function(exports_1, context_1) {
+System.register(["angular2/core", "./firebase-note.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,27 +10,33 @@ System.register(["angular2/core", "../../mock/notes/mock-notes"], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, mock_notes_1;
+    var core_1, firebase_note_service_1;
     var NoteService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (mock_notes_1_1) {
-                mock_notes_1 = mock_notes_1_1;
+            function (firebase_note_service_1_1) {
+                firebase_note_service_1 = firebase_note_service_1_1;
             }],
         execute: function() {
             NoteService = (function () {
-                function NoteService() {
+                function NoteService(_FirebaseNoteService) {
+                    this._FirebaseNoteService = _FirebaseNoteService;
                 }
-                NoteService.prototype.promiseNotes = function () { return Promise.resolve(mock_notes_1.MOCK_NOTES); };
-                NoteService.prototype.promiseNotesByTagName = function (tagName) {
-                    return Promise.resolve(mock_notes_1.MOCK_NOTES.filter(function (eachNote) { return eachNote.tags.indexOf(tagName) > -1; }));
+                NoteService.prototype.get = function (tagName) {
+                    return this._FirebaseNoteService.get(tagName).then(function (notes) {
+                        notes.forEach(function (each) {
+                            //each.tags = each.tags || [];
+                        });
+                        return notes;
+                    });
                 };
+                NoteService.prototype.promiseNotesByTagName = function (tagName) { };
                 NoteService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [firebase_note_service_1.FirebaseNoteService])
                 ], NoteService);
                 return NoteService;
             }());

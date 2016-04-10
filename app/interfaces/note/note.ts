@@ -3,5 +3,7 @@ export interface NoteInterface {
     text: string;
     updated: Date;
     created: Date;
+    totalDaysOfArchival: number;
     tags: string[];
+    priority: number;
 };

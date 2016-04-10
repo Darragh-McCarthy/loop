@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../constants/constants", "../../services/note/note.service", "../note/note.component", "angular2/router"], function(exports_1, context_1) {
+System.register(["angular2/core", "../../constants/constants", "../../services/note/note.service", "../note/note.component", "angular2/router", "../../services/note/firebase-note.service", "../../services/firebase/firebase.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "../../constants/constants", "../../services/n
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, constants_1, note_service_1, note_component_1, router_1;
+    var core_1, constants_1, note_service_1, note_component_1, router_1, firebase_note_service_1, firebase_service_1;
     var NotesList;
     return {
         setters:[
@@ -28,27 +28,43 @@ System.register(["angular2/core", "../../constants/constants", "../../services/n
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (firebase_note_service_1_1) {
+                firebase_note_service_1 = firebase_note_service_1_1;
+            },
+            function (firebase_service_1_1) {
+                firebase_service_1 = firebase_service_1_1;
             }],
         execute: function() {
             NotesList = (function () {
-                function NotesList(_NoteService /*,
-                    //private _router: Router*/) {
+                function NotesList(_NoteService) {
                     this._NoteService = _NoteService;
                 }
                 NotesList.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._NoteService.promiseNotes()
-                        .then(function (notes) { return _this.notes = notes; })
-                        .then(function (notes) { return console.log(notes); });
+                    this._NoteService.get(null).then(function (notes) { return _this.notes = notes; });
                 };
-                NotesList.prototype.viewNotesWithTag = function () {
-                    //this._router.navigate(["Tag", { tagName: "testingTag" }]);
+                NotesList.prototype.prependEmptyNote = function () {
+                    this.notes.unshift({
+                        id: null,
+                        text: null,
+                        created: null,
+                        updated: null,
+                        tags: [],
+                        priority: null,
+                        totalDaysOfArchival: null,
+                    });
+                    scroll(0, 0);
                 };
+                __decorate([
+                    core_1.ViewChildren(note_component_1.NoteComponent), 
+                    __metadata('design:type', note_component_1.NoteComponent)
+                ], NotesList.prototype, "viewChildren", void 0);
                 NotesList = __decorate([
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "notes-list",
                         templateUrl: "app/components/notes-list/notes-list.component.html",
-                        providers: [note_service_1.NoteService],
+                        providers: [note_service_1.NoteService, firebase_note_service_1.FirebaseNoteService, firebase_service_1.FirebaseService],
                         directives: [note_component_1.NoteComponent, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [note_service_1.NoteService])

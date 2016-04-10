@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../constants/constants", "../textarea/textarea.component", "angular2/router"], function(exports_1, context_1) {
+System.register(["angular2/core", "../../constants/constants", "../../services/note/firebase-note.service", "../textarea/textarea.component", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, constants_1, textarea_component_1, router_1;
-    var NoteComponent;
+    var core_1, constants_1, firebase_note_service_1, textarea_component_1, router_1;
+    var TAG_REGEX, NoteComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -20,6 +20,9 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
             function (constants_1_1) {
                 constants_1 = constants_1_1;
             },
+            function (firebase_note_service_1_1) {
+                firebase_note_service_1 = firebase_note_service_1_1;
+            },
             function (textarea_component_1_1) {
                 textarea_component_1 = textarea_component_1_1;
             },
@@ -27,13 +30,94 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
                 router_1 = router_1_1;
             }],
         execute: function() {
+            TAG_REGEX = /#\w+/g;
             NoteComponent = (function () {
-                function NoteComponent() {
+                function NoteComponent(_FirebaseNoteService) {
+                    this._FirebaseNoteService = _FirebaseNoteService;
+                    this.areTagsEditable = false;
+                    this.isSaving = false;
+                    this.isArchived = false;
+                    this.archiveDuration = null;
+                    this.isUpdated = false;
+                    this.ARCHIVE_PERIOD = {
+                        WEEK: 9,
+                        MONTH: 30,
+                        YEAR: 396,
+                        INDEFINITE: 365 * 100,
+                    };
                 }
+                NoteComponent.prototype.ngOnInit = function () {
+                    this.note.text = this.note.text || "";
+                };
+                NoteComponent.prototype.saveNote = function () {
+                    var _this = this;
+                    //return;
+                    if (this.isUpdated && this.note.text.trim().length) {
+                        // prevent original object properties from being overridden
+                        var noteCopy = Object.assign({}, this.note);
+                        noteCopy.updated = new Date();
+                        noteCopy.created = noteCopy.created || new Date();
+                        noteCopy.priority = noteCopy.priority || new Date().getTime();
+                        var promiseSave = void 0;
+                        if (noteCopy.id) {
+                            console.log(noteCopy);
+                            promiseSave = this._FirebaseNoteService.update(noteCopy);
+                        }
+                        else {
+                            promiseSave = this._FirebaseNoteService.create(noteCopy);
+                        }
+                        this.isSaving = true;
+                        promiseSave.then(function (newOrUpdatedNote) {
+                            _this.note = newOrUpdatedNote;
+                            _this.isSaving = false;
+                            _this.isUpdated = false;
+                            console.log(newOrUpdatedNote);
+                        })
+                            .catch(function () { return _this.isSaving = false; });
+                    }
+                };
+                NoteComponent.prototype.archive = function (period) {
+                    this.isUpdated = true;
+                    this.note.priority = constants_1.NOTE_PRIORITY_WHEN_ARCHIVED;
+                    this.note.totalDaysOfArchival = period;
+                    this.saveNote();
+                };
+                NoteComponent.prototype.archiveFor1Week = function () { this.archive(7); };
+                NoteComponent.prototype.archiveFor1Month = function () { this.archive(30); };
+                NoteComponent.prototype.archiveFor1Year = function () { this.archive(365); };
+                NoteComponent.prototype.archiveFor100Years = function () { this.archive(365 * 100); };
+                NoteComponent.prototype.undoArchive = function () {
+                    this.isUpdated = true;
+                    this.note.priority = new Date().getTime();
+                    this.note.totalDaysOfArchival = null;
+                    this.saveNote();
+                };
+                NoteComponent.prototype.appendHashTags = function () {
+                    var stringifiedTags = "\n";
+                    if (this.note.tags) {
+                        this.note.tags.forEach(function (each) { return stringifiedTags += " #" + each; });
+                        this.note.text += stringifiedTags;
+                    }
+                };
+                NoteComponent.prototype.stripHashTags = function () {
+                    if (this.note.tags) {
+                        var matchingTags = this.note.text.match(TAG_REGEX);
+                        if (matchingTags) {
+                            this.note.tags = matchingTags.map(function (eachTag) {
+                                return eachTag.replace("#", "");
+                            });
+                        }
+                        this.note.text = this.note.text.replace(TAG_REGEX, "").trim();
+                    }
+                };
                 __decorate([
                     core_1.Input("note"), 
-                    __metadata('design:type', String)
+                    __metadata('design:type', Object)
                 ], NoteComponent.prototype, "note", void 0);
+                __decorate([
+                    core_1.Input("isNoteFocused"), 
+                    __metadata('design:type', Boolean)
+                ], NoteComponent.prototype, "isNoteFocused", void 0);
                 NoteComponent = __decorate([
                     core_1.Component({
                         selector: constants_1.DIRECTIVE_PREFIX + "note",
@@ -41,7 +125,7 @@ System.register(["angular2/core", "../../constants/constants", "../textarea/text
                         styleUrls: ["app/components/note/note.component.css"],
                         directives: [textarea_component_1.TextareaDirective, router_1.ROUTER_DIRECTIVES],
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [firebase_note_service_1.FirebaseNoteService])
                 ], NoteComponent);
                 return NoteComponent;
             }());

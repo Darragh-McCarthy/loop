@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../../components/notes-list/notes-list.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "../../components/notes-list/notes-list.component", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "../../components/notes-list/notes-list.compon
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, notes_list_component_1;
+    var core_1, notes_list_component_1, router_1;
     var DashboardComponent;
     return {
         setters:[
@@ -19,24 +19,23 @@ System.register(["angular2/core", "../../components/notes-list/notes-list.compon
             },
             function (notes_list_component_1_1) {
                 notes_list_component_1 = notes_list_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
                 function DashboardComponent() {
                 }
-                DashboardComponent.prototype.ngOnInit = function () {
-                    /*this._heroService.getHeroes()
-                      .then(heroes => this.heroes = heroes.slice(1, 5));*/
-                };
-                DashboardComponent.prototype.gotoDetail = function () {
-                    //let link = ["HeroDetail", { id: hero.id }];
-                    //this._router.navigate(link);
-                };
                 DashboardComponent = __decorate([
                     core_1.Component({
                         selector: "my-dashboard",
                         templateUrl: "app/components/dashboard/dashboard.component.html",
-                        directives: [notes_list_component_1.NotesList]
+                        styleUrls: ["app/components/dashboard/dashboard.component.css"],
+                        directives: [
+                            notes_list_component_1.NotesList,
+                            router_1.ROUTER_DIRECTIVES
+                        ]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], DashboardComponent);

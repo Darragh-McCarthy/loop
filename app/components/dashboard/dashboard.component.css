@@ -1,0 +1,16 @@
+.dashboard {
+    margin-top:10rem;
+}
+.create-note-button {
+    position:fixed;
+    padding:1.5rem 3em;
+    font-size:0.9rem;
+    border:1px solid #ccc;
+    outline:0;
+    background:none;
+    margin: 1em;
+    position:fixed;
+    top:0;
+    left:0;
+    border-radius:0.5em;
+}

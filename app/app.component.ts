@@ -10,7 +10,7 @@ import { TagComponent } from "./components/tag/tag.component";
 
 @RouteConfig([
   {
-    path: "/tag/:tagName",
+    path: "/hashtag/:tagName",
     name: "Tag",
     component: TagComponent,
   },
@@ -23,18 +23,13 @@ import { TagComponent } from "./components/tag/tag.component";
 ])
 @Component({
   selector: "my-app",
-  template: `
-    <nav>
-      <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['Tag', {tagName:'hi there'}]">Tag</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: "app/app.component.html",
+  styleUrls: ["app/app.component.css"],
   directives: [
     ROUTER_DIRECTIVES
   ],
   providers: [
-    ROUTER_PROVIDERS
+     ROUTER_PROVIDERS
   ]
 })
 export class AppComponent {}
